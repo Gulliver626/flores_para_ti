@@ -4,17 +4,21 @@
 <meta charset="UTF-8">
 <title>Flores Amarillas</title>
 
+<!-- Tipografía elegante tipo carta -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
   body {
     margin: 0;
     overflow: hidden;
-    font-family: Arial, sans-serif;
 
-    /* 🎨 fondo tipo carta */
+    /* 📜 fondo tipo papel beige */
     background: 
-      radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
-      linear-gradient(#fff8dc, #ffe8a3);
-    background-size: 4px 4px, 100% 100%;
+      radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+      linear-gradient(#f5e6c8, #ecd9a3);
+    background-size: 3px 3px, 100% 100%;
+
+    font-family: 'Cormorant Garamond', serif;
   }
 
   h1 {
@@ -22,31 +26,26 @@
     width: 100%;
     top: 20%;
     text-align: center;
-    color: #5a3e00;
-    font-size: 2rem;
+    color: #4a3200;
+    font-size: 2.2rem;
     padding: 0 20px;
+    font-family: 'Playfair Display', serif;
+    line-height: 1.4;
   }
 
-  /* ✨ texto escondido estilo carta */
+  /* ✍️ mensaje escondido */
   p {
     position: absolute;
-    bottom: 20px;
-    left: 25px;
+    bottom: 25px;
+    left: 30px;
 
-    color: #5a3e00;
-    font-size: 0.9rem;
-    max-width: 300px;
+    color: #4a3200;
+    font-size: 1rem;
+    max-width: 320px;
 
-    opacity: 0.45; /* más tenue */
+    opacity: 0.35;
     font-style: italic;
     letter-spacing: 0.5px;
-
-    transition: 0.3s;
-  }
-
-  /* pequeño efecto al pasar el mouse */
-  p:hover {
-    opacity: 0.75;
   }
 
   .flower {
@@ -57,6 +56,7 @@
     animation: fall linear infinite;
   }
 
+  /* 🌼 caída más lenta y natural */
   @keyframes fall {
     from {
       transform: translateY(0) rotate(0deg) scale(var(--scale));
@@ -112,17 +112,21 @@ function createFlower() {
   flower.innerHTML = createSVGFlower();
 
   flower.style.left = Math.random() * window.innerWidth + "px";
-  flower.style.animationDuration = (4 + Math.random() * 4) + "s";
+
+  /* 🌼 MÁS LENTO */
+  flower.style.animationDuration = (8 + Math.random() * 6) + "s";
+
   flower.style.setProperty("--scale", 0.4 + Math.random());
 
   document.body.appendChild(flower);
 
   setTimeout(() => {
     flower.remove();
-  }, 8000);
+  }, 14000);
 }
 
-setInterval(createFlower, 250);
+/* menos cantidad = más elegante */
+setInterval(createFlower, 400);
 
 </script>
 
