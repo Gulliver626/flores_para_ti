@@ -8,8 +8,13 @@
   body {
     margin: 0;
     overflow: hidden;
-    background: linear-gradient(#fff7cc, #ffd966);
     font-family: Arial, sans-serif;
+
+    /* 🎨 fondo tipo carta */
+    background: 
+      radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+      linear-gradient(#fff8dc, #ffe8a3);
+    background-size: 4px 4px, 100% 100%;
   }
 
   h1 {
@@ -20,6 +25,28 @@
     color: #5a3e00;
     font-size: 2rem;
     padding: 0 20px;
+  }
+
+  /* ✨ texto escondido estilo carta */
+  p {
+    position: absolute;
+    bottom: 20px;
+    left: 25px;
+
+    color: #5a3e00;
+    font-size: 0.9rem;
+    max-width: 300px;
+
+    opacity: 0.45; /* más tenue */
+    font-style: italic;
+    letter-spacing: 0.5px;
+
+    transition: 0.3s;
+  }
+
+  /* pequeño efecto al pasar el mouse */
+  p:hover {
+    opacity: 0.75;
   }
 
   .flower {
@@ -49,15 +76,15 @@
   y desde entonces, todo se siente un poco más especial. ✨
 </h1>
 
+<p>
+  y si pudiera elegir un lugar seguro, siempre sería a tu lado.
+</p>
 
-<p> y si pudiera elegir un lugar seguro, siempre sería a tu lado. </p>
 <script>
 
-// 🌼 SVG tipo girasol (similar a tu imagen)
 function createSVGFlower() {
   return `
   <svg viewBox="0 0 100 100">
-    <!-- pétalos -->
     ${[...Array(12)].map((_, i) => {
       const angle = i * 30;
       return `<ellipse cx="50" cy="18" rx="12" ry="28"
@@ -65,7 +92,6 @@ function createSVGFlower() {
               transform="rotate(${angle} 50 50)" />`;
     }).join("")}
 
-    <!-- capa de pétalos interna -->
     ${[...Array(12)].map((_, i) => {
       const angle = i * 30 + 15;
       return `<ellipse cx="50" cy="22" rx="10" ry="24"
@@ -73,38 +99,29 @@ function createSVGFlower() {
               transform="rotate(${angle} 50 50)" />`;
     }).join("")}
 
-    <!-- centro -->
     <circle cx="50" cy="50" r="20" fill="#7a3e00"/>
     <circle cx="50" cy="50" r="14" fill="#8c4a00"/>
   </svg>
   `;
 }
 
-// 🌼 crear flores cayendo
 function createFlower() {
   const flower = document.createElement("div");
   flower.classList.add("flower");
 
   flower.innerHTML = createSVGFlower();
 
-  // posición aleatoria horizontal
   flower.style.left = Math.random() * window.innerWidth + "px";
-
-  // duración aleatoria
   flower.style.animationDuration = (4 + Math.random() * 4) + "s";
-
-  // escala con variable CSS (para que no rompa la rotación)
   flower.style.setProperty("--scale", 0.4 + Math.random());
 
   document.body.appendChild(flower);
 
-  // eliminar después
   setTimeout(() => {
     flower.remove();
   }, 8000);
 }
 
-// intervalo de creación
 setInterval(createFlower, 250);
 
 </script>
