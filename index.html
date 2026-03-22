@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Flores Amarillas</title>
+
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(#fff7cc, #ffd966);
+    font-family: Arial, sans-serif;
+  }
+
+  h1 {
+    position: absolute;
+    width: 100%;
+    top: 20%;
+    text-align: center;
+    color: #5a3e00;
+    font-size: 2rem;
+    padding: 0 20px;
+  }
+
+  .flower {
+    position: absolute;
+    top: -100px;
+    width: 60px;
+    height: 60px;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    from {
+      transform: translateY(0) rotate(0deg) scale(var(--scale));
+    }
+    to {
+      transform: translateY(110vh) rotate(360deg) scale(var(--scale));
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<h1>
+  Desde que llegaste, todo florece distinto… 🌼 <br>
+  y mi lugar favorito siempre será a tu lado 💛
+</h1>
+
+<script>
+
+// 🌼 SVG tipo girasol (similar a tu imagen)
+function createSVGFlower() {
+  return `
+  <svg viewBox="0 0 100 100">
+    <!-- pétalos -->
+    ${[...Array(12)].map((_, i) => {
+      const angle = i * 30;
+      return `<ellipse cx="50" cy="18" rx="12" ry="28"
+              fill="#f4c200"
+              transform="rotate(${angle} 50 50)" />`;
+    }).join("")}
+
+    <!-- capa de pétalos interna -->
+    ${[...Array(12)].map((_, i) => {
+      const angle = i * 30 + 15;
+      return `<ellipse cx="50" cy="22" rx="10" ry="24"
+              fill="#ffd84d"
+              transform="rotate(${angle} 50 50)" />`;
+    }).join("")}
+
+    <!-- centro -->
+    <circle cx="50" cy="50" r="20" fill="#7a3e00"/>
+    <circle cx="50" cy="50" r="14" fill="#8c4a00"/>
+  </svg>
+  `;
+}
+
+// 🌼 crear flores cayendo
+function createFlower() {
+  const flower = document.createElement("div");
+  flower.classList.add("flower");
+
+  flower.innerHTML = createSVGFlower();
+
+  // posición aleatoria horizontal
+  flower.style.left = Math.random() * window.innerWidth + "px";
+
+  // duración aleatoria
+  flower.style.animationDuration = (4 + Math.random() * 4) + "s";
+
+  // escala con variable CSS (para que no rompa la rotación)
+  flower.style.setProperty("--scale", 0.4 + Math.random());
+
+  document.body.appendChild(flower);
+
+  // eliminar después
+  setTimeout(() => {
+    flower.remove();
+  }, 8000);
+}
+
+// intervalo de creación
+setInterval(createFlower, 250);
+
+</script>
+
+</body>
+</html>
